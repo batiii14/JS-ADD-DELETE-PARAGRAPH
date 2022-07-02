@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flash Quiz</title>
+</head>
+
+<body>
+    <center>
+        <h1>Add and Delete Paragraphs with createElement and remove</h1>
+        <div style="width: 50%;">
+            <table>
+                <tr>
+                    <td colspan="2">
+                        <label for="myText">Enter Paragraph</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <textarea name="myText" id="myText" cols="30"
+                            rows="10"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button id="add">Add Paragraph</button>
+                    </td>
+                    <td>
+                        <button id="delete">Remove Paragraph</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div id="myParas"></div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </center>
+
+    <script>
+        var count = 0;
+
+
+        function addParagraph() {
+            var myText = document.getElementById("myText").value;
+
+            var newParagraph = document.createElement("p");
+            newParagraph.setAttribute("id", "para" + count);
+            count++;
+
+            var paragraphNode = document.createTextNode(myText);
+            newParagraph.appendChild(paragraphNode);
+
+            document.getElementById("myParas").appendChild(newParagraph);
+            document.getElementById("myText").value=' ';
+
+        }
+
+        function deleteParagraph() {
+            var myParagraphs = document.getElementsByTagName("p");
+            var lastParagraphIndex = myParagraphs.length - 1;
+
+            if (lastParagraphIndex < 0) {
+                alert("No Paragraph to delete");
+                return;
+            }
+
+            myParagraphs[lastParagraphIndex].remove();
+
+            // document.getElementById("para" + lastParagraphIndex).remove();
+            // count--;
+        }
+
+
+        document.getElementById("add").addEventListener("click", addParagraph);
+        document.getElementById("delete").addEventListener("click", deleteParagraph);
+    </script>
+</body>
+
+</html>
